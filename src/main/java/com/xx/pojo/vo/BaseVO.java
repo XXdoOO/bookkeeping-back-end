@@ -8,15 +8,5 @@ import java.util.Date;
 @Data
 public class BaseVO {
     private Long id;
-
-    @TableField(value = "is_enabled")
-    private Boolean enabled;
-
-    private Date updateTime;
     private Date createTime;
-    private Long createBy;
-    private String createByNickname;
-
-    @TableField(value = "is_deleted")
-    private Boolean deleted;
 }
