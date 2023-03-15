@@ -1,8 +1,10 @@
 package com.xx.pojo.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.xx.util.ValidationGroups;
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data

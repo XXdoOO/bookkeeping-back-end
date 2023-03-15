@@ -10,8 +10,4 @@ import java.util.List;
 public class BaseService<M extends BaseMapper<T>, T> extends ServiceImpl<M, T> {
     @Autowired
     protected M baseMapper;
-
-    public List<T> getList(T t) {
-        return baseMapper.selectList(new LambdaQueryWrapper<T>(t));
-    }
 }

@@ -1,5 +1,8 @@
 package com.xx.controller;
 
+import com.xx.pojo.entity.User;
+import com.xx.util.BaseUserInfo;
+import com.xx.util.JWTUtil;
 import com.xx.util.MyResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,5 +31,9 @@ public class BaseController {
 
     public MyResponse fail(String msg) {
         return MyResponse.fail(msg);
+    }
+
+    public User getCurrentUser() {
+        return BaseUserInfo.get();
     }
 }
