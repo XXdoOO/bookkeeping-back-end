@@ -2,7 +2,6 @@ package com.xx.pojo.entity;
 
 import com.xx.util.ValidationGroups;
 import lombok.Data;
-import org.apache.ibatis.annotations.Update;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;

@@ -4,7 +4,6 @@ import com.xx.util.ValidationGroups;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 @Data
 public class Book extends BaseEntity {

@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @MapperScan("com.xx.mapper")
 @EnableTransactionManagement
-@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+@SpringBootApplication()
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
