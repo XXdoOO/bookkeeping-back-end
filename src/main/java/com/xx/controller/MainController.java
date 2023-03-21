@@ -44,6 +44,11 @@ public class MainController extends BaseController {
         return success(new PageInfo<>(recordService.getRecord(dto)));
     }
 
+    @DeleteMapping("record/{id}")
+    public MyResponse removeRecord(@PathVariable Long id) {
+        return recordService.removeById(id) ? success() : error();
+    }
+
     @GetMapping("book")
     public MyResponse getBook() {
         return success(bookService.list(new LambdaQueryWrapper<Book>().
@@ -54,5 +59,10 @@ public class MainController extends BaseController {
     public MyResponse saveBook(@Validated @RequestBody Book book) {
         book.setCreateBy(BaseUserInfo.get().getId());
         return bookService.saveOrUpdate(book) ? success() : error();
+    }
+
+    @DeleteMapping("book/{id}")
+    public MyResponse removeBook(@PathVariable Long id) {
+        return bookService.removeById(id) ? success() : error();
     }
 }
