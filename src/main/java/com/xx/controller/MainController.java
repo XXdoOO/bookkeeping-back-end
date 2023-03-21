@@ -11,6 +11,7 @@ import com.xx.service.RecordService;
 import com.xx.service.UserService;
 import com.xx.util.BaseUserInfo;
 import com.xx.util.MyResponse;
+import com.xx.util.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,14 @@ public class MainController extends BaseController {
 
     @Autowired
     private BookService bookService;
+
+    @RequestMapping("/notLogin")
+    public MyResponse notLogin() {
+        MyResponse response = new MyResponse();
+        response.setCode(StatusCode.UNAUTHORIZED);
+        response.setMsg("未登录");
+        return response;
+    }
 
     @GetMapping("login")
     public MyResponse login(@RequestParam String openid, @RequestParam String sessionKey) {
