@@ -18,7 +18,7 @@ public class JWTInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token = request.getHeader("token");
         if (StringUtils.isEmpty(token)) {
-            throw new Exception("token不能为空");
+            response.sendRedirect("/notLogin");
         }
         try {
             JWTUtil.verify(token);
