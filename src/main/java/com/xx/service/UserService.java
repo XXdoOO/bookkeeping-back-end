@@ -18,6 +18,9 @@ public class UserService extends BaseService<UserMapper, User> {
         user.setSessionKey(sessionKey);
 
         BaseUserInfo.set(user);
-        return JWTUtil.getToken(user);
+
+        String token = JWTUtil.getToken(user);
+        System.out.println("token: " + token);
+        return token;
     }
 }
