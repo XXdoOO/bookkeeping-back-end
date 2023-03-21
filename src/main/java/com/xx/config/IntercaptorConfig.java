@@ -13,6 +13,6 @@ public class IntercaptorConfig implements WebMvcConfigurer {
                 //拦截的路径
                 .addPathPatterns("/**")
                 //排除登录接口
-                .excludePathPatterns("/login");
+                .excludePathPatterns("/login").addPathPatterns("/notLogin");
     }
 }
