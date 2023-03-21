@@ -36,7 +36,7 @@ public class MainController extends BaseController {
         return response;
     }
 
-    @GetMapping("login")
+    @PostMapping("login")
     public MyResponse login(@RequestParam String openid, @RequestParam String sessionKey) {
         String login = userService.login(openid, sessionKey);
         return login == null ? error() : success(login);
