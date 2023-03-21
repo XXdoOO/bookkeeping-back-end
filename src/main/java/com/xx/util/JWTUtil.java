@@ -11,6 +11,8 @@ import com.xx.pojo.entity.User;
 import java.util.Calendar;
 
 public class JWTUtil {
+    private static String sessionKey;
+
     public static String getToken(User u) {
         Calendar instance = Calendar.getInstance();
         //默认令牌过期时间7天
@@ -19,6 +21,7 @@ public class JWTUtil {
         JWTCreator.Builder builder = JWT.create();
         builder.withClaim("id", u.getOpenid());
 
+        sessionKey = u.getSessionKey();
         return builder.withExpiresAt(instance.getTime())
                 .sign(Algorithm.HMAC256(u.getSessionKey()));
     }
@@ -31,8 +34,7 @@ public class JWTUtil {
             throw new Exception("token不能为空");
         }
 
-        String password = "admin";
-        JWTVerifier build = JWT.require(Algorithm.HMAC256(password)).build();
+        JWTVerifier build = JWT.require(Algorithm.HMAC256(sessionKey)).build();
         return build.verify(token);
     }
 }
