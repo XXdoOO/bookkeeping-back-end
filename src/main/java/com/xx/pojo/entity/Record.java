@@ -1,5 +1,7 @@
 package com.xx.pojo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.xx.util.ValidationGroups;
 import lombok.Data;
 
@@ -11,6 +13,7 @@ public class Record extends BaseEntity {
     @NotNull(groups = ValidationGroups.Insert.class)
     private Long bookId;
 
+    @TableField("is_pay")
     @NotNull(groups = ValidationGroups.Insert.class)
     private Boolean pay;
 
@@ -22,4 +25,7 @@ public class Record extends BaseEntity {
 
     @NotNull
     private Date time;
+
+    @NotNull
+    private String remark;
 }
