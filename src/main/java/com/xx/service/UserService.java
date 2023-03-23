@@ -10,17 +10,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService extends BaseService<UserMapper, User> {
     public String login(String openid, String sessionKey) {
-        // boolean exists = this.baseMapper.exists(new LambdaQueryWrapper<User>().
-        //         eq(User::getOpenid, openid));
+        boolean exists = this.baseMapper.exists(new LambdaQueryWrapper<User>().
+                eq(User::getOpenid, openid));
 
-        User user = new User();
-        user.setOpenid(openid);
-        user.setSessionKey(sessionKey);
-
-        BaseUserInfo.set(user);
-
-        String token = JWTUtil.getToken(user);
-        System.out.println("token: " + token);
-        return token;
+        User u;
+        if (exists) {
+            u = this.baseMapper.selectOne(new LambdaQueryWrapper<User>().
+                    eq(User::getOpenid, openid));
+        } else {
+            User user = new User();
+            user.setOpenid(openid);
+            user.setSessionKey(sessionKey);
+            this.baseMapper.insert(user);
+            u = user;
+        }
+        BaseUserInfo.set(u);
+        return JWTUtil.getToken(u);
     }
 }
