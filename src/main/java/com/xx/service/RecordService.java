@@ -13,11 +13,11 @@ import java.util.Objects;
 public class RecordService extends BaseService<RecordMapper, Record> {
     public List<Record> getRecord(RecordDTO dto) {
         return this.baseMapper.selectList(new LambdaQueryWrapper<Record>().
-                eq(Objects.isNull(dto.getBookId()), Record::getBookId, dto.getBookId()).
-                eq(Objects.isNull(dto.getPay()), Record::getPay, dto.getPay()).
-                eq(Objects.isNull(dto.getType()), Record::getType, dto.getType()).
-                ge(Objects.isNull(dto.getStartTime()), Record::getTime, dto.getStartTime()).
-                le(Objects.isNull(dto.getEndTime()), Record::getTime, dto.getEndTime())
+                eq(!Objects.isNull(dto.getBookId()), Record::getBookId, dto.getBookId()).
+                eq(!Objects.isNull(dto.getPay()), Record::getPay, dto.getPay()).
+                eq(!Objects.isNull(dto.getType()), Record::getType, dto.getType()).
+                ge(!Objects.isNull(dto.getStartTime()), Record::getTime, dto.getStartTime()).
+                le(!Objects.isNull(dto.getEndTime()), Record::getTime, dto.getEndTime())
         );
     }
 }

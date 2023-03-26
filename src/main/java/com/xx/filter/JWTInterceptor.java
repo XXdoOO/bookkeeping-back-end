@@ -3,7 +3,10 @@ package com.xx.filter;
 import com.auth0.jwt.exceptions.AlgorithmMismatchException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.xx.pojo.entity.User;
+import com.xx.util.BaseUserInfo;
 import com.xx.util.JWTUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -21,7 +24,11 @@ public class JWTInterceptor implements HandlerInterceptor {
             response.sendRedirect("/notLogin");
         }
         try {
-            JWTUtil.verify(token);
+            DecodedJWT verify = JWTUtil.verify(token);
+
+            User user = new User();
+            user.setId(verify.getClaim("id").asLong());
+            BaseUserInfo.set(user);
         } catch (SignatureVerificationException e) {
             log.error("无效签名！ 错误 ->", e);
             response.sendRedirect("/notLogin");

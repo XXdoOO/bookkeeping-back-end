@@ -1,11 +1,13 @@
 package com.xx.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xx.pojo.dto.RecordDTO;
 import com.xx.pojo.entity.Book;
 import com.xx.pojo.entity.Record;
+import com.xx.pojo.entity.User;
 import com.xx.service.BookService;
 import com.xx.service.RecordService;
 import com.xx.service.UserService;
@@ -41,6 +43,17 @@ public class MainController extends BaseController {
         return success(userService.login(openid, sessionKey));
     }
 
+    @PutMapping("user")
+    public MyResponse updateUser(@RequestBody User user) {
+        user.setId(BaseUserInfo.get().getId());
+        return userService.updateById(user) ? success() : error();
+    }
+
+    @GetMapping("user")
+    public MyResponse getUser() {
+        return success(userService.getById(BaseUserInfo.get().getId()));
+    }
+
     @PostMapping("record")
     public MyResponse saveRecord(@Validated @RequestBody Record record) {
         return recordService.saveOrUpdate(record) ? success() : error();
@@ -73,4 +86,9 @@ public class MainController extends BaseController {
     public MyResponse removeBook(@PathVariable Long id) {
         return bookService.removeById(id) ? success() : error();
     }
+
+    // @GetMapping("sum")
+    // public MyResponse getSum(RecordDTO dto){
+    //
+    // }
 }

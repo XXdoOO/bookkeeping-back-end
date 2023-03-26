@@ -19,7 +19,7 @@ public class JWTUtil {
         instance.add(Calendar.DATE, 7);
 
         JWTCreator.Builder builder = JWT.create();
-        builder.withClaim("id", u.getOpenid());
+        builder.withClaim("id", u.getId());
 
         sessionKey = u.getSessionKey();
         return builder.withExpiresAt(instance.getTime())

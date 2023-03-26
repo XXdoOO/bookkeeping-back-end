@@ -32,8 +32,4 @@ public class BaseController {
     public MyResponse fail(String msg) {
         return MyResponse.fail(msg);
     }
-
-    public User getCurrentUser() {
-        return BaseUserInfo.get();
-    }
 }
